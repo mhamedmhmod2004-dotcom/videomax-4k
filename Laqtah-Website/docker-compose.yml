@@ -1,0 +1,19 @@
+services:
+  laqtah:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      - DOWNLOAD_DIR=/app/downloads
+      - MAX_FILE_SIZE_MB=1024
+      - MAX_DURATION_MINUTES=120
+    volumes:
+      - laqtah_data:/app/downloads
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 200
+    mem_limit: 2g
+
+volumes:
+  laqtah_data:
